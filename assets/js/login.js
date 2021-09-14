@@ -58,7 +58,7 @@ $(function () {
                 console.log(res.token);
                 localStorage.setItem("token",res.token)
                 // 登录成功后跳转到index.html首页
-                // location.href = "/index.html"
+                location.href = "/index.html"
             }
         })
     })
