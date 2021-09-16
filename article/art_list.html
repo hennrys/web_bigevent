@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/assets/lib/layui/css/layui.css">
+  <link rel="stylesheet" href="/assets/css/article/art_list.css">
+</head>
+
+<body>
+  <div class="layui-card">
+    <div class="layui-card-header">文章列表</div>
+    <div class="layui-card-body">
+      <!-- 筛选区域 -->
+      <form class="layui-form"  id="selectCate">
+        <div class="layui-form-item">
+          <div class="layui-input-block">
+            <select name="cate_id">
+              <option value="">所有分类</option>
+            </select>
+            <select name="state">
+              <option value="">所有状态</option>
+              <option value="已发布">已发布</option>
+              <option value="草稿">草稿</option>
+            </select>
+            <button class="layui-btn" lay-submit lay-filter="formDemo">筛选</button>
+          </div>
+        </div>
+      </form>
+      <!-- 列表区域 -->
+      <table class="layui-table">
+        <colgroup>
+          <col>
+          <col width="150">
+          <col width="180">
+          <col width="150">
+          <col width="150">
+        </colgroup>
+        <thead>
+          <tr>
+            <th>文章标题</th>
+            <th>分类</th>
+            <th>发表时间</th>
+            <th>状态</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody id="artList">
+        </tbody>
+      </table>
+      <!-- 分页区域 -->
+      <div id="pageBox"></div>
+    </div>
+  </div>
+  <!-- 编辑模板脚本 -->
+  <script type="text/html" id="dialog-edit">
+        <form class="layui-form" id="form-editCate" lay-filter="form-editCate">
+          <input type="hidden" name="Id">
+          <div class="layui-form-item">
+            <label class="layui-form-label">分类名称</label>
+            <div class="layui-input-block">
+              <input type="text" name="name" required  lay-verify="required" placeholder="请输入分类名称" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <label class="layui-form-label">分类别名</label>
+            <div class="layui-input-block">
+              <input type="text" name="alias" required  lay-verify="required" placeholder="请输入分类别名" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <div class="layui-input-block">
+              <button class="layui-btn" lay-submit lay-filter="formDemo">确认修改</button>
+            </div>
+          </div>
+        </form>
+    </script>
+  <!-- 列表模板引擎脚本 -->
+  <script type="text/html" id="tem-artList">
+        {{each data}}
+        <tr>
+            <td>{{$value.title}}</td>
+            <td>{{$value.cate_name}}</td>
+            <td>{{$value.pub_date | dateFormat}}</td>
+            <td>{{$value.state}}</td>
+            <td>
+                <button type="button" class="layui-btn layui-btn-xs article-Edit" data-id="{{$value.Id}}">编辑</button>
+                <button type="button" class="layui-btn layui-btn-xs layui-btn-danger btn-delArt" data-id="{{$value.Id}}">删除</button>
+            </td>
+        </tr>
+        {{/each}}
+    </script>
+    <script type="text/html" id="tem-artCate">
+      {{each data}}
+      <option value="{{$value.Id}}">{{$value.name}}</option>
+      {{/each}}
+    </script>
+
+
+    <script></script>
+  <script src="/assets/lib/layui/layui.all.js"></script>
+  <script src="/assets/lib/jquery.js"></script>
+  <script src="/assets/js/baseAPI.js"></script>
+  <script src="/assets/lib/template-web.js"></script>
+  <script src="/assets/js/article/art_list.js"></script>
+</body>
+
+</html>

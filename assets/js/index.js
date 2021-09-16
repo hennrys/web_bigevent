@@ -1,4 +1,5 @@
 $(function () {
+    localStorage.removeItem("artId");
     getUserInfo();
     var larer = layui.larer;
     // 点击实现退出首页  跳转登录界面
@@ -50,4 +51,7 @@ function renderAvatar(user) {
         $(".text-avatar").html(name.slice(0, 1).toUpperCase()).show();
         $(".layui-nav-img").hide()
     }
+}
+function hrefArtListHtml(){
+    $("#art_lists").addClass("layui-this").siblings().removeClass("layui-this")
 }

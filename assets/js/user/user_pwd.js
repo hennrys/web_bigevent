@@ -1,4 +1,5 @@
 $(function () {
+    localStorage.removeItem("artId");
     var form = layui.form;
     var layer = layui.layer;
     form.verify({
